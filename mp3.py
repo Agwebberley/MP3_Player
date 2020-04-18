@@ -1,7 +1,10 @@
 from pygame import mixer
 from tkinter import *
+import os
 root = Tk()
 root.title("MP3")
+currentDirectory = os.getcwd()
+root.iconbitmap(currentDirectory + "/ico.ico")
 
 def play():
 	print("playing")
@@ -11,24 +14,28 @@ def play():
 
 def unpause():
 	print("testing if unpause is needed")
-	try:
-		print("still testing")
-		if unpause == True:
-			print("unpausing")
-			print(lastpos)
-			mixer.music.unpause()
-	except:
+	
+
+	if willunpause == True:
+		print("unpausing")
+		print(lastpos)
+		mixer.music.unpause()
+	elif willunpause == False:
 		print("unpause not needed")
 		play()
 
 
 def pause():
-	global unpause
+	global willunpause
 	global lastpos
 
 	lastpos = mixer.music.get_pos()
-	unpause = True
+	willunpause = True
 	mixer.music.pause()
+
+global willunpause
+willunpause = False
+
 
 
 mixer.init()
